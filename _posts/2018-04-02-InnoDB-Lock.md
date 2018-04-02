@@ -54,7 +54,7 @@ S   不兼容    兼容
 - https://dev.mysql.com/doc/refman/5.7/en/innodb-locks-table.html
 - mysql>select * from information_schema.innodb_lock_waits\G
 - https://dev.mysql.com/doc/refman/5.7/en/sys-innodb-lock-waits.html
-# InnoDB监控
+# InnoDB锁监控
 - 1、MySQL 5.6.16之前
 ````
 打开innodb的锁监控：
@@ -63,6 +63,7 @@ S   不兼容    兼容
     DROP TABLE innodb_lock_monitor;
 ````
 - 2、MySQL 5.6.16后
+
 ````
 set GLOBAL innodb_status_output=ON;
 set GLOBAL innodb_status_output_locks=ON;
