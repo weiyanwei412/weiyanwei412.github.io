@@ -67,5 +67,5 @@ S   不兼容    兼容
 ````
 set GLOBAL innodb_status_output=ON;
 set GLOBAL innodb_status_output_locks=ON;
-```
+````
 
