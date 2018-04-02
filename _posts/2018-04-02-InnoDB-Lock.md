@@ -1,8 +1,8 @@
 ---
 layout:     post
 title:      InnoDB-Lock
-subtitle:   搭建
-date:       2018-04-02
+subtitle:   原理
+date:       2018-04-02
 author:     dbstack
 header-img: img/post-bg-swift.jpg
 catalog: true
@@ -31,7 +31,8 @@ S   不兼容    兼容
 意向锁是将锁定的对象分为多个层次，意向锁意味着事务希望在更细粒度（fine grantularity）上进行加锁。
 如下图
 ````
-- ![GitHub Logo](../img/lock-1.jpg "lock-1.jpg")
+- ![GitHub Logo](../img/lock.jpg "lock.jpg")
+
 ````
   如果将上锁的对象看成一棵树，那么对最下层的对象上锁，也就是对最细颗粒度的对象进行上锁，那么首先需要对粗颗粒度的对象上锁。如上图所示，如果需要对page上的记录r进行上X锁，那么分别对数据库 、表、page上意向锁IX，最后对记录r上X锁。若其中任何一个部分导致等待，那么改操作需要等待粗粒度锁的完成。
   eg:在对记录r上加X锁之前，已经有事务对表1进行了S锁，那么表1上已经存在S锁，之后事务需要对记录r在表1上加IX，由于不兼容，所以改事务需要等待表锁操作的完成。
