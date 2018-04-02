@@ -46,14 +46,12 @@ S   不兼容    兼容
 - 官方锁介绍连接
 - https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-shared-exclusive-locks
 # InnoDB 锁监控语句
-````
-mysql>show engine innodb status\G
-mysql>select * from information_schema.innodb_trx\G
-https://dev.mysql.com/doc/refman/5.7/en/innodb-trx-table.html
-mysql>select * from information_schema.innodb_locks\G
-https://dev.mysql.com/doc/refman/5.7/en/innodb-locks-table.html
-mysql>select * from information_schema.innodb_lock_waits\G
-https://dev.mysql.com/doc/refman/5.7/en/sys-innodb-lock-waits.html
+- mysql>show engine innodb status\G
+- mysql>select * from information_schema.innodb_trx\G
+- https://dev.mysql.com/doc/refman/5.7/en/innodb-trx-table.html
+- mysql>select * from information_schema.innodb_locks\G
+- https://dev.mysql.com/doc/refman/5.7/en/innodb-locks-table.html
+- mysql>select * from information_schema.innodb_lock_waits\G
+- https://dev.mysql.com/doc/refman/5.7/en/sys-innodb-lock-waits.html
 
-````
 
