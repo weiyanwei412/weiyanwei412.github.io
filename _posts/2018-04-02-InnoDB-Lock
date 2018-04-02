@@ -31,4 +31,4 @@ S   不兼容    兼容
 意向锁是将锁定的对象分为多个层次，意向锁意味着事务希望在更细粒度（fine grantularity）上进行加锁。
 如下图
 ''''
- - ![GitHub Logo](../img/lock-1.jpg "lock-1.jpg")
+- ![GitHub Logo](../img/lock-1.jpg "lock-1.jpg")
