@@ -54,6 +54,12 @@ S   不兼容    兼容
 - https://dev.mysql.com/doc/refman/5.7/en/innodb-locks-table.html
 - mysql>select * from information_schema.innodb_lock_waits\G
 - https://dev.mysql.com/doc/refman/5.7/en/sys-innodb-lock-waits.html
+-
+-
+- use sys;select * from innodb_lock_waits\G
+-
+
+
 # InnoDB锁监控
 - 1、MySQL 5.6.16之前
 ````
