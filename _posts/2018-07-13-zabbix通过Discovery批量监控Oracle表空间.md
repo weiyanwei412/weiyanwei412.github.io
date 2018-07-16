@@ -1,8 +1,8 @@
 ---
 layout:     post
 title:      "zabbix通过Discovery批量监控Oracle表空间"
-subtitle:   原理
-date:       2018-07-16
+subtitle:   实践出真知
+date:       2018-07-16
 author:     dbstack
 header-img: img/post-bg-swift2.jpg
 catalog: true
@@ -48,7 +48,8 @@ select tablespace_name,autoextensible from dba_data_files;
 spool off
 quit
 EOF
-};check &>/dev/null
+};
+check &>/dev/null
 ```
  执行这个脚本，并生成两个保存有oracle表空间名称信息的文件：/tmp/ora_tablespace.txt和/tmp/ora_autex.txt。
 ```shell
