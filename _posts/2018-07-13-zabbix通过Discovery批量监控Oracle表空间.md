@@ -48,8 +48,7 @@ select tablespace_name,autoextensible from dba_data_files;
 spool off
 quit
 EOF
-};
-check &>/dev/null
+};check &>/dev/null
 ```
  执行这个脚本，并生成两个保存有oracle表空间名称信息的文件：/tmp/ora_tablespace.txt和/tmp/ora_autex.txt。
 ```shell
