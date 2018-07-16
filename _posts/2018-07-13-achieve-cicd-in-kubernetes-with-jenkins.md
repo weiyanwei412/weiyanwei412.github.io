@@ -2,7 +2,7 @@
 layout:     post
 title:      "Kuberbetes-- 利用Jenkins在Kubernetes中实践CI/CD"
 subtitle:   原理
-date:       2018-04-07
+date:       2018-07-13
 author:     dbstack
 header-img: img/post-bg-iWatch.jpg
 catalog: true
