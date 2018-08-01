@@ -2,7 +2,7 @@
 layout:     post
 title:     Oracle rman 命令总结
 subtitle:   最佳实践
-date:       2018-07-31
+date:       2018-08-01
 author:     dbstack
 header-img: img/post-bg-ios10.jpg
 catalog: true
