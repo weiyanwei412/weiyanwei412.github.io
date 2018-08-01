@@ -186,14 +186,14 @@ restore datafile 5 preview;
 
 --命令块
 run{
-2> shutdown immediate;
-3> startup mount;
-4> allocate channel d1 type disk;
-5> backup as backupset database
-6> format='/u01/backup/rman/%d_%T.bak';
-7> alter database open;
-8> sql 'alter system archive log current';
-9> }
+   shutdown immediate;
+   startup mount;
+   allocate channel d1 type disk;
+   backup as backupset database
+   format='/u01/backup/rman/%d_%T.bak';
+   alter database open;
+   sql 'alter system archive log current';
+   }
 
 select * from v$log;
 select * from v$archived_log;
@@ -208,25 +208,25 @@ repair failure     --修复(数据文件和控制文件)
 
 --rman下对数据文件重命名
 run{
-2> sql 'alter tablespace yesorno offline';
-3> set newname for datafile '/u01/app/oracle/oradata/yesorno.dbf'
-4> to '/u01/app/oracle/oradata/yesorno01.dbf';
-5> restore tablespace yesorno;
-6> switch datafile all;
-7> recover tablespace yesorno;
-8> sql 'alter tablespace yesorno online';
+  sql 'alter tablespace yesorno offline';
+  set newname for datafile '/u01/app/oracle/oradata/yesorno.dbf'
+  to '/u01/app/oracle/oradata/yesorno01.dbf';
+  restore tablespace yesorno;
+  switch datafile all;
+  recover tablespace yesorno;
+  sql 'alter tablespace yesorno online';
 }
 
 
 --rman下对数据文件移动
 run{
-2> sql 'alter tablespace yesorno offline';
-3> set newname for datafile '/u01/app/oracle/oradata/yesorno01.dbf'
-4> to '/u01/app/oracle/oradata/dbtest/yesorno01.dbf';
-5> restore tablespace yesorno;
-6> switch datafile all;
-7> recover tablespace yesorno;
-8> sql 'alter tablespace yesorno online';
+   sql 'alter tablespace yesorno offline';
+   set newname for datafile '/u01/app/oracle/oradata/yesorno01.dbf'
+   to '/u01/app/oracle/oradata/dbtest/yesorno01.dbf';
+   restore tablespace yesorno;
+   switch datafile all;
+   recover tablespace yesorno;
+   sql 'alter tablespace yesorno online';
 }
 ```
 ## END
