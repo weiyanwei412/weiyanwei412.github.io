@@ -92,7 +92,7 @@ for item in _input:
          ret.append(item)
       ' '.join(item)
 2）range 内建函数
-
+```
 
 
 
