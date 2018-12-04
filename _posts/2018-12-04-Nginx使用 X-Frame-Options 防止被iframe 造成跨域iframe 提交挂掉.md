@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      nginx_使用 X-Frame-Options 防止被iframe 造成跨域iframe 提交挂掉
+title:      Nginx使用 X-Frame-Options 防止被iframe 造成跨域iframe 提交挂掉
 subtitle:   nginx
 date:       2018-12-04
 author:     BY
