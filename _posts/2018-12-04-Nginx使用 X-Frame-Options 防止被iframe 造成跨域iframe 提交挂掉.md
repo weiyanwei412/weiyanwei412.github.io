@@ -11,7 +11,7 @@ tags:
     - linux 
 ---
 
-## nginx_使用 X-Frame-Options 防止被iframe 造成跨域iframe 提交挂掉
+## Nginx使用 X-Frame-Options 防止被iframe 造成跨域iframe 提交挂掉
 ````shell
 Refused to display 'http://www.***.com/org/***' in a frame because it set 'X-Frame-Options' to 'SAMEORIGIN'. 
 触发原因：页面的返回头被设置 X-Frame-Options SAMEORIGIN ，只能被同源的iframe 引用。跨域名的iframe 没法显示了。
