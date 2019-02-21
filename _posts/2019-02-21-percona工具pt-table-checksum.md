@@ -54,8 +54,8 @@ insert into slave(`id`,`dsn`) values(1,'h=192.168.1.15,P=3306');
 4、执行检测
 
 pt-table-checksum --nocheck-replication-filter --no-check-binlog-format --databases="zx_sms"  --tables="sms_user_info"    --create-replicate-table --replicate=percona.checksums --recursion-method=dsn=D=percona,t=slave --host=localhost --port=3306 --user=checksum_user --password=checksum_password
-
-
+````
+````
 注意报错
 Character set 'utf8mb4' is not a compiled character set and is not specified in the '/usr/share/mysql/charsets/Index.xml' file
 Character set 'utf8mb4' is not a compiled character set and is not specified in the '/usr/share/mysql/charsets/Index.xml' file
@@ -64,12 +64,10 @@ Character set 'utf8mb4' is not a compiled character set and is not specified in 
 
 修改  /usr/share/mysql/charsets/Index.xml
 <charset name="utf8">
-
 为
 <charset name="utf8mb4">
-
-
-
+````
+````shell
 5、同步数据(注意需要在从库上执行)  
 ./pt-table-sync --sync-to-master h=192.168.56.132,P=3306,u=root,p=123456 --databases=zx_sms --tables=sms_user_info --charset=utf8mb4 --print --execute    ----注意这里写从库的IP
 ````
