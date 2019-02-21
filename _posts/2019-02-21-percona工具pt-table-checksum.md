@@ -55,9 +55,8 @@ insert into slave(`id`,`dsn`) values(1,'h=192.168.1.15,P=3306');
 
 pt-table-checksum --nocheck-replication-filter --no-check-binlog-format --databases="zx_sms"  --tables="sms_user_info"    --create-replicate-table --replicate=percona.checksums --recursion-method=dsn=D=percona,t=slave --host=localhost --port=3306 --user=checksum_user --password=checksum_password
 
---------------------------------------------------------------------------------------------------------------
-注意报错
 
+注意报错
 Character set 'utf8mb4' is not a compiled character set and is not specified in the '/usr/share/mysql/charsets/Index.xml' file
 Character set 'utf8mb4' is not a compiled character set and is not specified in the '/usr/share/mysql/charsets/Index.xml' file
 02-21T14:28:01 DBI connect(';host=localhost;port=3306;mysql_read_default_group=client','root',...) failed: Can't initialize character set utf8mb4 (path: /usr/share/mysql/charsets/) at /usr/bin/pt-table-checksum line 1581
@@ -68,7 +67,7 @@ Character set 'utf8mb4' is not a compiled character set and is not specified in 
 
 为
 <charset name="utf8mb4">
----------------------------------------------------------------------------------------------------------------
+
 
 
 5、同步数据(注意需要在从库上执行)  
