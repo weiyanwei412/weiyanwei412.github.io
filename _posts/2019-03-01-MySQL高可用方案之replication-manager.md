@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "mongodb高可用之副本集"
+title:      "MySQL高可用方案之replication-manager"
 subtitle:   实践出真知
 date:       2019-03-01
 author:     dbstack
