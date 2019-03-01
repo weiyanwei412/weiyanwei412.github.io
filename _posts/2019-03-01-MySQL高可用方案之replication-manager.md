@@ -14,9 +14,10 @@ tags:
 
 - Replication-Manager 主要用于mysql主从结构的监控和主从切换.
 - 代码仓库: https://github.com/signal18/replication-manager
-- 官方文档：https://docs.signal18.io/installation/setup-instructions
-- 配置yum  源
+- 官方文档：https://docs.signal18.io/installation/setup-instruction
+
 ````shell
+配置yum  源
 cat >/etc/yum.repos.d/signal18.repo<<-EOF
 [signal18]
 name=Signal18 repositories
