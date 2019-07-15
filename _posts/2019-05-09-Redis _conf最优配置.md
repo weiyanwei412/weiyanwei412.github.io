@@ -2,7 +2,7 @@
 layout:     post
 title:     Redis _conf最优配置
 subtitle:   最佳实践
-date:       2019-05-9
+date:       2019-05-09
 author:     dbstack
 header-img: img/post-bg-mma-4.jpg
 catalog: true
