@@ -24,6 +24,7 @@ tags:
 3、 重启kibana systemctl restart kibana
 ```
 (4)访问kibana  http://192.168.100.15:5601
+
 ![Alt text](https://github.com/weiyanwei412/weiyanwei412.github.io/blob/master/img/kibana-sentl.png)
 
 (5)配置邮件报警
