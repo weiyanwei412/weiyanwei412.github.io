@@ -2,9 +2,9 @@
 layout:     post
 title:     repcached+keepalived的高可用memcached集群
 subtitle:   最佳实践
-date:       2019-07-15
+date:       2019-07-17
 author:     dbstack
-header-img: img/post-bg-mma-4.jpg
+header-img: img/post-bg-desk.jpg
 catalog: true
 tags:
     - memcached
