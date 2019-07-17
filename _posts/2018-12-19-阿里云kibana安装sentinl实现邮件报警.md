@@ -13,22 +13,22 @@ tags:
 ---
 
 ## 阿里云kibana安装sentinl实现邮件报警
-- sentinl github地址：https://github.com/sirensolutions/sentinl
-- sentinl github个版本地址：https://github.com/sirensolutions/sentinl/releases
+(1) sentinl github地址：https://github.com/sirensolutions/sentinl
 
-# 安装sentinl
-````shell
+(2) sentinl github个版本地址：https://github.com/sirensolutions/sentinl/releases
+
+(3) 安装sentinl
+```
 1、 下载自己需要的版本，我这里kibana是6.5.2 我下载了sentinl-v6.5.2.zip
 2、 安装sentinl /usr/share/kibana/bin/kibana-plugin install file:///`pwd`/sentinl-v6.5.2.zip
 3、 重启kibana systemctl restart kibana
-````
-访问kibana
-http://192.168.100.15:5601
+```
+(4)访问kibana  http://192.168.100.15:5601
 如图
 <p><img width="400" src="https://github.com/weiyanwei412/weiyanwei412.github.io/blob/master/img/kibana-sentl.png?raw=true" height="303" alt=""></p>
 
-#配置邮件报警
-````
+(5)配置邮件报警
+```
 1、配置kibana邮箱发送
 修改kibana配置文件
 cat >>/etc/kibana/kibana.yml<<-EOF
@@ -131,7 +131,7 @@ sentinl 页面新增Watcher Advanced
 }
 
 保存，在Alarms栏目 会看到相应的报警
-````
+```
 
 
 ## end
