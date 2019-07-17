@@ -11,7 +11,7 @@ tags:
 ---
 
 ## MySQL-redolog与binlog的一致性
-````sell
+```
 binlog与redo的一致性
 使用 内部分布式事物 来保证一致性
 在 commit 时（无论用户自己输入，或者系统自动添加），会有如下几个步骤：
@@ -42,4 +42,4 @@ binlog与redo的一致性
 1. 在MySQL5.6以后， 写入binlog（步骤二） 和 写入commit log（步骤三） ，都是通过 组提交 的方式刷入（fsync）到磁盘的。
 2. 在MySQL 5.7以后，写入 prepare log（步骤一） 也是通过 组提交 的方式刷入（fsync）到磁盘的（在写binlog之前执行一次fsync，就批量刷入prepare log）
 注意：组提交中失败了，并 不会回滚 该组中的 所有事物 ，而是哪个失败了，就回滚哪个。
-````
+```
