@@ -13,7 +13,9 @@ tags:
 ## MySQL高可用方案之Replication-Manager
 
 (1)Replication-Manager 主要用于mysql主从结构的监控和主从切换.
+
 (2) 代码仓库: https://github.com/signal18/replication-manager
+
 (3) 官方文档：https://docs.signal18.io/installation/setup-instruction
 
 ```
