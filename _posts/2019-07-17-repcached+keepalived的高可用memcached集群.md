@@ -263,4 +263,42 @@ root@dep-test-s03:~# ip a
 root@dep-test-s03:~# 
 ```
 （5）应用程序直接调用vip 即可：10.101.100.5:11211
+# 模拟memcached 故障
+```
+(1)模拟3memcached  挂
+
+ps -ef|grep rep|grep -v grep|awk '{print $2}'|xargs kill -9
+
+(2)片刻后vip 10.101.100.5会自动挂载到10.101.100.4的ens160上
+
+(3)数据统计/etc/keepalived下
+sh memcached-tool 10.101.100.3:11211
+sh memcached-tool 10.101.100.4:11211
+sh memcached-tool 10.101.100.5:11211
+
+(4)模拟修复10.101.100.3上的memcached
+/usr/local/bin/repcached -d -x 10.101.100.4 -p 11211 -u memcached -m 3072 -c 4096 -t 4 -P /var/run/memcached/memcached.pid -v >> /tmp/memcached.log 2>&1
+
+(5)统计数据/etc/keepalived下
+sh memcached-tool 10.101.100.3:11211
+sh memcached-tool 10.101.100.4:11211
+sh memcached-tool 10.101.100.5:11211
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
