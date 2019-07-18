@@ -264,22 +264,41 @@ root@dep-test-s03:~#
 ```
 （5）应用程序直接调用vip 即可：10.101.100.5:11211
 # 模拟memcached 故障
-```
+
 (1)模拟3memcached  挂
-
+```
 ps -ef|grep rep|grep -v grep|awk '{print $2}'|xargs kill -9
-
+```
 (2)片刻后vip 10.101.100.5会自动挂载到10.101.100.4的ens160上
-
+```
+root@dep-test-s04:~# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: ens160: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 00:50:56:85:ed:b6 brd ff:ff:ff:ff:ff:ff
+    inet 10.101.100.4/16 brd 10.101.255.255 scope global noprefixroute ens160
+       valid_lft forever preferred_lft forever
+    inet 10.101.100.5/32 scope global ens160
+       valid_lft forever preferred_lft forever
+3: ens192: <BROADCAST,MULTICAST,UP,LOWE
+R_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 00:50:56:85:4f:9f brd ff:ff:ff:ff:ff:ff
+root@dep-test-s04:~# 
+```
 (3)数据统计/etc/keepalived下
+```
 sh memcached-tool 10.101.100.3:11211
 sh memcached-tool 10.101.100.4:11211
 sh memcached-tool 10.101.100.5:11211
-
+```
 (4)模拟修复10.101.100.3上的memcached
+```
 /usr/local/bin/repcached -d -x 10.101.100.4 -p 11211 -u memcached -m 3072 -c 4096 -t 4 -P /var/run/memcached/memcached.pid -v >> /tmp/memcached.log 2>&1
-
+```
 (5)统计数据/etc/keepalived下
+```
 sh memcached-tool 10.101.100.3:11211
 sh memcached-tool 10.101.100.4:11211
 sh memcached-tool 10.101.100.5:11211
