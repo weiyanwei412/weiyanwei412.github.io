@@ -141,123 +141,100 @@ yum install -y keepalived
 ```
 (2) 10.101.100.3 keepalived.conf 配置文件
 ```
- cat >/etc/keepalived/keepalived.conf<<-EOF
-! Configuration File for keepalived
-
-global_defs {
-   notification_email {
-     acassen@firewall.loc
-     failover@firewall.loc
-     sysadmin@firewall.loc
-   }
-   notification_email_from Alexandre.Cassen@firewall.loc
-   smtp_server 192.168.200.1
-   smtp_connect_timeout 30
-   router_id LVS_DEVEL
-   vrrp_skip_check_adv_addr
-   vrrp_garp_interval 0
-   vrrp_gna_interval 0
+ global_defs {
+     router_id Load-Balancer-1
 }
-
-vrrp_instance VI_1 {
-    state BACKUP
-    interface ens160
-    virtual_router_id 52
-    priority 100
-    advert_int 1
-    nopreempt 
-    authentication {
-        auth_type PASS
-        auth_pass 1111
-    }
-    virtual_ipaddress {
-        10.101.100.5
-    }
+ vrrp_script check_mem {
+     script "/etc/keepalived/check_mem.sh"
+     interval 2
+     fall 3
+ }
+vrrp_instance haproxy {
+        state BACKUP
+        interface ens160
+        virtual_router_id 110
+        priority 150
+        advert_int 1
+        nopreempt
+        garp_master_delay 10
+    track_interface {
+     ens160
+     }
+ authentication {
+     auth_type PASS
+     auth_pass flaginfo
+ }
+ virtual_ipaddress {
+    10.101.100.5
+ }
+ track_script {
+      check_mem
+ }
+          notify_master "/bin/bash /etc/keepalived/notify.sh Master"
+          notify_backup "/bin/bash /etc/keepalived/notify.sh Backup"
+          notify_fault "/bin/bash /etc/keepalived/notify.sh Fault"
+          notify_stop "/bin/bash /etc/keepalived/notify.sh Stop"
 }
-
-virtual_server 10.101.100.5 11211 { 
-    delay_loop 6 
-    lb_algo rr 
-    lb_kind DR 
-    persistence_timeout 50 
-    protocol TCP 
- 
-    real_server 10.101.100.3 11211 { 
-        weight 3
-        notify_down /etc/keepalived/kill_keepalived.sh
-        TCP_CHECK { 
-            connect_timeout 10 
-            nb_get_retry 3 
-            delay_before_retry 3 
-            connect_port 11211
-        } 
-    } 
-}
-EOF
-
-cat >/etc/keepalived/kill_keepalived.sh<<-EOF
-#!/bin/bash 
-pkill keepalived
 EOF
 
 ```
 (2) 10.101.100.4 keepalived.conf 配置文件
 ```
 cat >/etc/keepalived/keepalived.conf<<-EOF
-! Configuration File for keepalived
-
 global_defs {
-   notification_email {
-     acassen@firewall.loc
-     failover@firewall.loc
-     sysadmin@firewall.loc
-   }
-   notification_email_from Alexandre.Cassen@firewall.loc
-   smtp_server 192.168.200.1
-   smtp_connect_timeout 30
-   router_id LVS_DEVEL
+   router_id Load-Balancer-2
 }
-
-vrrp_instance VI_1 {
-    state BACKUP  
+ vrrp_script check_mem {
+    script "/etc/keepalived/check_mem.sh"
+    interval 2
+    fall 3
+ }
+vrrp_instance haproxy {
+    state BACKUP
     interface ens160
-    virtual_router_id 52
-    priority 90
+    virtual_router_id 110
+    priority 100
     advert_int 1
-    authentication {
-        auth_type PASS
-        auth_pass 1111
-    }
-    virtual_ipaddress {
-       10.101.100.5
-    }
+    nopreempt
+    garp_master_delay 10
+ track_interface {
+  ens160
+ }
+ authentication {
+  auth_type PASS
+  auth_pass flaginfo
+ }
+ virtual_ipaddress {
+    10.101.100.5
+ }
+ track_script {
+    check_mem
+ }
+      notify_master "/bin/bash /etc/keepalived/notify.sh Master"
+      notify_backup "/bin/bash /etc/keepalived/notify.sh Backup"
+      notify_fault "/bin/bash /etc/keepalived/notify.sh Fault"
+      notify_stop "/bin/bash /etc/keepalived/notify.sh Stop"
 }
-
-virtual_server 10.101.100.5 11211 { 
-    delay_loop 6 
-    lb_algo rr 
-    lb_kind DR 
-    persistence_timeout 50 
-    protocol TCP 
-
-    real_server 10.101.100.4 11211 { 
-        weight 3
-        notify_down /etc/keepalived/kill_keepalived.sh
-        TCP_CHECK { 
-            connect_timeout 10 
-            nb_get_retry 3 
-            delay_before_retry 3 
-            connect_port 11211
-        } 
-    } 
-}
-EOF
-
-cat >/etc/keepalived/kill_keepalived.sh<<-EOF
-#!/bin/bash 
-pkill keepalived
 EOF
 ```
+
+```
+yxtuser@dep-test-s03:~$ cat /etc/keepalived/check_mem.sh 
+#!/bin/bash
+status=`echo "stats" |nc 127.0.0.1 11211|grep pid|awk '{print $3}'`
+if [ "$status" > 0 ]; then 
+        exit 0
+else
+        exit -1
+fi
+```
+
+```
+yxtuser@dep-test-s03:~$ cat /etc/keepalived/notify.sh 
+#!/bin/bash
+echo $(date +%F-%T)" Change to $1" >> /etc/keepalived/notify.log
+```
+
 (4)分别在 10.101.100.3， 10.101.100.4启动keepalived
 ```
  在10.101.100.3上
