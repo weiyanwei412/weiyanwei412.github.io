@@ -8,7 +8,7 @@ header-img: img/post-bg-mma-4.jpg
 catalog: true
 tags:
     - ELK
-    -kibana
+    - kibana
     - Elastsearcher 
 ---
 ## Kibana Create index pattern 卡住 返回403 Forbidden
