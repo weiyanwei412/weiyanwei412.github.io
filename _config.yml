@@ -1,10 +1,10 @@
 # Site settings
-title: DBSTACK Blog
-SEOTitle: DBSTACK的博客 | DBSTACK Blog
+title: 乐天 Blog
+SEOTitle: 乐天的博客 | DBSTACK Blog
 header-img: img/post-bg-desk.jpg
 email: 412166174@qq.com
 description: "Every failure is leading towards success."
-keyword: "BY, BY Blog, dbstack的博客, dbstack, 乐天, iOS, Apple, iPhone"
+keyword: "BY, BY Blog, 乐天的博客, dbstack, 乐天, iOS, Apple, iPhone"
 url: "http://weiyanwei412.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/weiyanwei412/weiyanwei412.github.io.git" # you code repository
@@ -101,15 +101,6 @@ friends: [
     {
         title: "51-CTO",
         href: "http://blog.51cto.com/412166174"
-    },{
-        title: "简书·BY",
-        href: "#######"
-    },{
-        title: "Apple",
-        href: "https://apple.com"
-    },{
-        title: "Apple Developer",
-        href: "https://developer.apple.com/"
     }
 ]
 
