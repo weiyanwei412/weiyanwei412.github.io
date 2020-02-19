@@ -245,7 +245,10 @@ Address:	172.18.1.11#53
 Name:	dns.imysql.xyz
 Address: 172.18.1.14
 ```
-
+# CoreDNS 在etcd 存储查看
+```
+ETCDCTL_API=3  etcdctl   --endpoints 172.18.1.11:2379,172.18.1.12:2379,172.18.1.13:2379 get / --prefix
+```
 
 
 
