@@ -245,6 +245,76 @@ Address:	172.18.1.11#53
 Name:	dns.imysql.xyz
 Address: 172.18.1.14
 ```
+# 接口操作CoreDNS
+```
+coredns只能使用etcd v3版本api添加的数据，etcdctl命令默认使用v2版本api，设置v3 api方法
+export ETCDCTL_API=3
+或者添加以下内容到环境变量 vim ~/.bash_profile:
+export ETCDCTL_API=3
+(1) A记录
+etcdctl put /coredns/xyz/imysql/www '{"host":"172.18.1.14","ttl":10}'
+OK
+etcd的目录结构和域名是相反的，即上面表示域名：www.imysql.xyz
+ttl值设置10s后，coredns每10s才会到etcd读取这个域名的记录一次
+
+如果想添加多条记录，让coredns轮询，方法如下：
+etcdctl put /coredns/xyz/imysql/www/1 '{"host":"172.18.1.14","ttl":10}'
+etcdctl put /coredns/xyz/imysql/www/2 '{"host":"172.18.1.15","ttl":10}'
+
+1和2可以自定义，比如a、b、c等
+设置多个AAAA、CNAME等方法类似
+添加/coredns/xyz/imysql/www/1、2后，请求www.imysql.xyz就不会再读取/coredns/xyz/imysql/www，
+可以使用etcdctl del /coredns/xyz/imysql/www 删除值
+
+    nslookup www.imysql.xyz
+Server:		172.18.1.11
+Address:	172.18.1.11#53
+
+Name:	www.imysql.xyz
+Address: 172.18.1.14
+Name:	www.imysql.xyz
+Address: 172.18.1.15
+**注意：**如果想让取消设置的轮询值，需要删除/coredns/xyz/imysql/www/1与/coredns/xyz/imysql/www/2
+
+（2） AAAA记录
+% etcdctl put /coredns/xyz/imysql/www '{"host":"1002::4:2","ttl":10}'
+OK
+查询结果：
+
+% dig -t AAAA @localhost +short www.imysql.xyz   
+1002::4:2
+
+(3) CNAME记录
+% etcdctl put /coredns/xyz/imysql/www '{"host":"www.taobao.com","ttl":10}'
+OK
+查询结果：
+
+% dig -t CNAME @localhost +short www.imysql.xyz
+www.taobao.com.
+这里cname设置成外部百度域名，按理说coredns应该也把这个cname记录继续解析成www.taobao.com的IP地址，但是经过测试发现请求www.imysql.xyz只能解析到CNAME：www.taobao.com，无法继续解析，原因未知，以后研究
+
+(4)SRV记录
+% etcdctl put /coredns/xyz/imysql/www '{"host":"www.taobao.com","port":80,"ttl":10}'
+OK
+SRV记录和CNAME记录类似，只是多了port，它们的添加方法其实可以通用
+查询结果：
+
+% dig -t SRV @localhost +short www.imysql.xyz
+10 100 80 www.taobao.com.
+
+
+(5)TXT记录
+% etcdctl put /coredns/xyz/imysql/www '{"text":"Hello World!","ttl":10}'  
+OK
+查询结果：
+
+% dig -t TXT @localhost +short www.imysql.xyz
+"Hello World!"
+
+```
+
+
+
 # CoreDNS 在etcd 存储查看
 ```
 ETCDCTL_API=3  etcdctl   --endpoints 172.18.1.11:2379,172.18.1.12:2379,172.18.1.13:2379 get / --prefix
