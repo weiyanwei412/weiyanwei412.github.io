@@ -168,7 +168,25 @@ cat >/etc/coredns/Corefile<<-"EOF"
 }
 EOF
 
-nohup /usr/bin/coredns -conf /etc/coredns/Corefile > /tmp/coredns.log 2>&1 &
+cat > /lib/systemd/system/coredns.service << EOF
+[Unit]
+Description=Coredns
+After=network-online.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/coredns -conf /etc/coredns/Corefile
+Restart=always
+ExecStop=/bin/kill -9 $MAINPID
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=coredns
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable coredns
+systemctl start coredns
 
 （2）172.18.1.12
 cat >/etc/coredns/Corefile<<-"EOF" 
@@ -196,7 +214,25 @@ cat >/etc/coredns/Corefile<<-"EOF"
 }
 EOF
 
-nohup /usr/bin/coredns -conf /etc/coredns/Corefile > /tmp/coredns.log 2>&1 &
+cat > /lib/systemd/system/coredns.service << EOF
+[Unit]
+Description=Coredns
+After=network-online.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/coredns -conf /etc/coredns/Corefile
+Restart=always
+ExecStop=/bin/kill -9 $MAINPID
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=coredns
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable coredns
+systemctl start coredns
 (3)
 cat >/etc/coredns/Corefile<<-"EOF" 
 .:53 {
@@ -223,7 +259,25 @@ cat >/etc/coredns/Corefile<<-"EOF"
 }
 EOF
 
-nohup /usr/bin/coredns -conf /etc/coredns/Corefile > /tmp/coredns.log 2>&1 &
+cat > /lib/systemd/system/coredns.service << EOF
+[Unit]
+Description=Coredns
+After=network-online.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/coredns -conf /etc/coredns/Corefile
+Restart=always
+ExecStop=/bin/kill -9 $MAINPID
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=coredns
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable coredns
+systemctl start coredns
 
 
 ```
