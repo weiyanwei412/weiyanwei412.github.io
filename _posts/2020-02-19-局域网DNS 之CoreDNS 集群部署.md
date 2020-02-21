@@ -19,7 +19,7 @@ tags:
 - etcd1 coredns-node1 172.18.1.11
 - etcd2 coredns-node2 172.18.1.12
 - etcd3 coredns-node3 172.18.1.13
-# etcd 集群部署
+# 一、etcd 集群部署
 - 下载好对应版本，并mv 到 /usr/bin/目录下
 ```
  (1)tar -xf etcd-v3.3.18-linux-amd64.tar.gz && cd etcd-v3.3.18-linux-amd64 && mv etcd* /usr/bin/
@@ -137,7 +137,7 @@ ETCDCTL_API=3  etcdctl   --endpoints 172.18.1.11:2379,172.18.1.12:2379,172.18.1.
 172.18.1.12:2379 is healthy: successfully committed proposal: took = 2.209654ms
 172.18.1.13:2379 is healthy: successfully committed proposal: took = 2.469605ms
 ```
-# CoreDNS 部署
+# 二、CoreDNS 部署
 - 三台机器上分别执行
 ```
 mkdir /etc/coredns
@@ -228,7 +228,7 @@ nohup /usr/bin/coredns -conf /etc/coredns/Corefile > /tmp/coredns.log 2>&1 &
 
 ```
 
-# CoreDNS 测试
+# 三、CoreDNS 测试
 ```
 在机器172.18.1.17 上
 cat >/etcd/resolv.conf<<-"EOF"
@@ -245,7 +245,7 @@ Address:	172.18.1.11#53
 Name:	dns.imysql.xyz
 Address: 172.18.1.14
 ```
-# 接口操作CoreDNS
+# 四、接口操作CoreDNS
 ```
 coredns只能使用etcd v3版本api添加的数据，etcdctl命令默认使用v2版本api，设置v3 api方法
 export ETCDCTL_API=3
@@ -315,7 +315,7 @@ OK
 
 
 
-# CoreDNS 在etcd 存储查看
+# 五、CoreDNS 在etcd 存储查看
 ```
 ETCDCTL_API=3  etcdctl   --endpoints 172.18.1.11:2379,172.18.1.12:2379,172.18.1.13:2379 get / --prefix
 ```
