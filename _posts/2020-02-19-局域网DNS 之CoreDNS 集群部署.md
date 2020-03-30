@@ -140,7 +140,8 @@ ETCDCTL_API=3  etcdctl   --endpoints 172.18.1.11:2379,172.18.1.12:2379,172.18.1.
 # 二、CoreDNS 部署
 - 三台机器上分别执行
 ```
-mkdir /etc/coredns
+mkdir /etc/coredns  /var/log/coredns
+
 
 (1)172.18.1.11上 
 cat >/etc/coredns/Corefile<<-"EOF" 
