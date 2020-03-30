@@ -2,7 +2,7 @@
 layout:     post
 title:      局域网DNS 之CoreDNS 集群部署
 subtitle:   实战
-date:       2019-12-20
+date:       2020-02-19
 author:     dbstack
 header-img: img/post-bg-mma-4.jpg
 catalog: true
@@ -68,7 +68,7 @@ Documentation=https://github.com/coreos
 Type=notify
 WorkingDirectory=/var/lib/etcd/
 ExecStart=/usr/bin/etcd \
-  --name=etcd1 \
+  --name=etcd2 \
   --initial-advertise-peer-urls=http://172.18.1.12:2380 \
   --listen-peer-urls=http://172.18.1.12:2380 \
   --listen-client-urls=http://172.18.1.12:2379,http://127.0.0.1:2379 \
@@ -99,7 +99,7 @@ Documentation=https://github.com/coreos
 Type=notify
 WorkingDirectory=/var/lib/etcd/
 ExecStart=/usr/bin/etcd \
-  --name=etcd1 \
+  --name=etcd3 \
   --initial-advertise-peer-urls=http://172.18.1.13:2380 \
   --listen-peer-urls=http://172.18.1.13:2380 \
   --listen-client-urls=http://172.18.1.13:2379,http://127.0.0.1:2379 \
