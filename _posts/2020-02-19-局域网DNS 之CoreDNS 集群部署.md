@@ -174,12 +174,11 @@ Description=Coredns
 After=network-online.target
 [Service]
 Type=simple
-ExecStart=/usr/bin/coredns -conf /etc/coredns/Corefile
+ExecStart= /bin/sh -c '/usr/bin/coredns -conf /etc/coredns/Corefile > /var/log/coredns/coredns.log 2>&1'
 Restart=always
-ExecStop=/bin/kill -9 $MAINPID
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=coredns
+ExecStop=/bin/kill -9 
+LimitNOFILE =65535
+TimeoutSec=60
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -220,12 +219,11 @@ Description=Coredns
 After=network-online.target
 [Service]
 Type=simple
-ExecStart=/usr/bin/coredns -conf /etc/coredns/Corefile
+ExecStart= /bin/sh -c '/usr/bin/coredns -conf /etc/coredns/Corefile > /var/log/coredns/coredns.log 2>&1'
 Restart=always
-ExecStop=/bin/kill -9 $MAINPID
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=coredns
+ExecStop=/bin/kill -9 
+LimitNOFILE =65535
+TimeoutSec=60
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -265,12 +263,11 @@ Description=Coredns
 After=network-online.target
 [Service]
 Type=simple
-ExecStart=/usr/bin/coredns -conf /etc/coredns/Corefile
+ExecStart= /bin/sh -c '/usr/bin/coredns -conf /etc/coredns/Corefile > /var/log/coredns/coredns.log 2>&1'
 Restart=always
-ExecStop=/bin/kill -9 $MAINPID
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=coredns
+ExecStop=/bin/kill -9 
+LimitNOFILE =65535
+TimeoutSec=60
 [Install]
 WantedBy=multi-user.target
 EOF
