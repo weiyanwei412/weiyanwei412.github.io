@@ -162,7 +162,7 @@ cat >/etc/coredns/Corefile<<-"EOF"
     fallthrough
   }
   forward . /etc/resolv.conf
-  cache 120
+  cache 30
   reload 6s
   log
   errors
@@ -207,7 +207,7 @@ cat >/etc/coredns/Corefile<<-"EOF"
     fallthrough
   }
   forward . /etc/resolv.conf
-  cache 120
+  cache 30
   reload 6s
   log
   errors
@@ -251,7 +251,7 @@ cat >/etc/coredns/Corefile<<-"EOF"
     fallthrough
   }
   forward . /etc/resolv.conf
-  cache 120
+  cache 30
   reload 6s
   log
   errors
