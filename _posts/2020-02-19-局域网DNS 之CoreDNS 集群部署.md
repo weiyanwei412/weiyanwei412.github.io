@@ -175,7 +175,7 @@ Description=Coredns
 After=network-online.target
 [Service]
 Type=simple
-ExecStart= /bin/sh -c '/usr/bin/coredns -conf /etc/coredns/Corefile > /var/log/coredns/coredns.log 2>&1'
+ExecStart= /bin/sh -c '/usr/bin/coredns -conf /etc/coredns/Corefile >> /var/log/coredns/coredns.log 2>&1'
 Restart=always
 ExecStop=/bin/kill -9 
 LimitNOFILE =65535
@@ -220,7 +220,7 @@ Description=Coredns
 After=network-online.target
 [Service]
 Type=simple
-ExecStart= /bin/sh -c '/usr/bin/coredns -conf /etc/coredns/Corefile > /var/log/coredns/coredns.log 2>&1'
+ExecStart= /bin/sh -c '/usr/bin/coredns -conf /etc/coredns/Corefile >> /var/log/coredns/coredns.log 2>&1'
 Restart=always
 ExecStop=/bin/kill -9 
 LimitNOFILE =65535
@@ -264,7 +264,7 @@ Description=Coredns
 After=network-online.target
 [Service]
 Type=simple
-ExecStart= /bin/sh -c '/usr/bin/coredns -conf /etc/coredns/Corefile > /var/log/coredns/coredns.log 2>&1'
+ExecStart= /bin/sh -c '/usr/bin/coredns -conf /etc/coredns/Corefile >> /var/log/coredns/coredns.log 2>&1'
 Restart=always
 ExecStop=/bin/kill -9 
 LimitNOFILE =65535
