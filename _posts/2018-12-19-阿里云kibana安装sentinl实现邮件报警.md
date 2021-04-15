@@ -37,7 +37,7 @@ sentinl:
     email:
       active: true
       user: XXX@163.com
-      password: 327fbe5aca
+      password: 11111
       host: smtp.exmail.qq.com
       port: 465
       ssl: true
